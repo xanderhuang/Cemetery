@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+    <meta charset="utf-8">
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        
+        video {
+            position: fixed;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- <div class="lead_in">
+        <div style="height:1000vh; background-color: #EEC695">
+            <img class="opa" src="https://i.imgur.com/dQSG9fY.jpg" style="position:fixed;opacity:1;width:90vw;z-index:4" data-pos="1" ;>
+            <img class="opa" src="https://i.imgur.com/7obvwwS.jpg" style="position:fixed;opacity:1;width:90vw;z-index:3" data-pos="2" ;>
+            <img src="https://i.imgur.com/Aw8DFVR.jpg" style="position:fixed;opacity:1;width:90vw;z-index:1">
+        </div>
+        <div style=" height:100vh; background-color: #EEC695"></div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="scroll_video_excavator" style="height: 300vh; padding: 0px;">
+            <video id="video_excavator" src="https://i.imgur.com/K9TNisB.mp4"></video>
+            <div style="width:100%; min-height:6000px"></div>
+        </div>
+    </div> -->
+
+    <div class="container-fluid">
+        <div class="scroll_video_google_earth" style="height: 300vh; padding: 0px;">
+            <video id="video_google_earth" src="https://i.imgur.com/228fAzj.mp4"></video>
+            <div style="width:100%; min-height:6000px"></div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+    <script>
+        // Lead-in
+        $(function() {
+            let scrollable = $(".lead_in").height() - $(window).height();
+            console.log(scrollable);
+            $(window).scroll(function() {
+                let scrolled = $(document).scrollTop();
+                $(".opa").each(function(index) {
+                    $(this).css("opacity", $(this).data("pos") - (4 * scrolled) / scrollable);
+                    console.log(
+                        "[" + scrolled / scrollable + "]" + index + ": " + $(this).css("opacity")
+                    );
+                });
+            });
+        });
+
+        // Excavator scroll video
+        $(function() {
+            var cover_scroll_max = $(".scroll_video_excavator").height() - $(window).height();
+            $(window).scroll(function() {
+                var current_pos = $(document).scrollTop();
+                var video = $("#video_excavator").get(0);
+                var videolength = video.duration;
+                if (current_pos >= 0 && current_pos < $(".scroll_video_excavator").offset().top + $(".scroll_video_excavator").height()) {
+                    video.currentTime = current_pos / cover_scroll_max * videolength;
+                    $("#video_excavator").css("opacity", 1 - (current_pos / cover_scroll_max - 0.7));
+                }
+            });
+        });
+
+        // Google Earth scroll video
+        $(function() {
+            var cover_scroll_max = $(".scroll_video_google_earth").height() - $(window).height();
+            $(window).scroll(function() {
+                var current_pos = $(document).scrollTop();
+                var video = $("#video_google_earth").get(0);
+                var videolength = video.duration;
+                if (current_pos >= 0 && current_pos < $(".scroll_video_google_earth").offset().top + $(".scroll_video_google_earth").height()) {
+                    video.currentTime = current_pos / cover_scroll_max * videolength;
+                    $("#video_google_earth").css("opacity", 1 - (current_pos / cover_scroll_max - 0.7));
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>

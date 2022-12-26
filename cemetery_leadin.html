@@ -7,35 +7,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <!-- Google Fonts -->
-    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto Sans TC"> -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fredericka the Great">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Passero+One">
-
     <title>Scrolled Opacity</title>
+    <link rel="stylesheet" href="css/style.css">
 
 </head>
 
 <body>
-
-    <div style="height:300vh;">
-        <img class="opa" src="https://i.imgur.com/dT36hoz.jpg" style="position:fixed;opacity:1;width:100vw;z-index:4" data-pos="1" ;>
-        <img class="opa" src="https://i.imgur.com/AvrY2TR.jpg" style="position:fixed;opacity:1;width:100vw;z-index:3" data-pos="2" ;>
-        <img src="https://i.imgur.com/c63c6bs.jpg" style="position:fixed;opacity:1;width:100vw;z-index:1">
+    <div class="lead-in">
+        <div style="height:1000vh; background-color: #EEC695">
+            <img class="opa" src="https://i.imgur.com/dQSG9fY.jpg" style="position:fixed;opacity:1;width:90vw;z-index:4" data-pos="1" ;>
+            <img class="opa" src="https://i.imgur.com/7obvwwS.jpg" style="position:fixed;opacity:1;width:90vw;z-index:3" data-pos="2" ;>
+            <img src="https://i.imgur.com/Aw8DFVR.jpg" style="position:fixed;opacity:1;width:90vw;z-index:1">
+        </div>
+        <div style=" height:100vh; background-color: #EEC695"></div>
     </div>
-    <div style=" height:100vh;background-color: gray"></div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script>
-        $(function() {
+        $(".lead-in").ready(function() {
             let scrollable = $(document).height() - $(window).height();
             console.log(scrollable);
             $(window).scroll(function() {
                 let scrolled = $(document).scrollTop();
                 $(".opa").each(function(index) {
-                    $(this).css("opacity", $(this).data("pos") - (2 * scrolled) / scrollable);
+                    $(this).css("opacity", $(this).data("pos") - (4 * scrolled) / scrollable);
                     console.log(
                         "[" + scrolled / scrollable + "]" + index + ": " + $(this).css("opacity")
                     );

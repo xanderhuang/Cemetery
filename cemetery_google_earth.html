@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+    <meta charset="utf-8">
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        
+        video {
+            position: fixed;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <div class="scroll_video_google_earth" style="height: 300vh; padding: 0px;">
+            <video id="video_google_earth" src="https://i.imgur.com/228fAzj.mp4"></video>
+            <div style="width:100%; min-height:6000px"></div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+    <script>
+        // $(".google_earth").ready(function() {
+        //     var max_scroll = $(document).height() - $(window).height();
+        //     $(window).scroll(function(e) {
+        //         var video = $(document).get(0),
+        //             videoLength = video.duration,
+        //             current_pos = $(document).scrollTop();
+        //         video.currentTime = videoLength * (current_pos / max_scroll);
+        //     });
+        // });
+
+        $(function() {
+            var cover_scroll_max = $(".scroll_video_google_earth").height() - $(window).height();
+            $(window).scroll(function() {
+                var current_pos = $(document).scrollTop();
+                var video = $("#video_google_earth").get(0);
+                var videolength = video.duration;
+                if (current_pos >= 0 && current_pos < $(".scroll_video_google_earth").offset().top + $(".scroll_video_google_earth").height()) {
+                    video.currentTime = current_pos / cover_scroll_max * videolength;
+                    $("#video_google_earth").css("opacity", 1 - (current_pos / cover_scroll_max - 0.7));
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>
