@@ -21,45 +21,57 @@
     <div style="height:40vh;background-color:#EEC695"></div>
     <div class="line-chart" style="height:50vh;">
         <div class="row">
-            <div class="col-md-3"></div>
             <div class="col-md-6">
-                <div><canvas id="lineChart" width="100" height="60"></canvas></div>
+                <div><canvas id="lineChart1" width="100" height="60"></canvas></div>
+            </div>
+            <div class="col-md-6">
+                <div><canvas id="lineChart2" width="100" height="60"></canvas></div>
             </div>
         </div>
     </div>
     <div style="height:40vh;background-color:#EEC695"></div>
 
-
-
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script>
-        let ctx2 = document.getElementById("lineChart").getContext("2d");
+        let ctx2 = document.getElementById("lineChart1").getContext("2d");
         let chartdata = {
             type: "line",
             data: {
                 labels: [2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011],
                 datasets: [{
-                    label: "Number of graves",
-                    data: [3024, 3163, 3154, 3150, 3162, 3161, 3148, 3140, 3132, 3125, 3164],
-                    fill: false,
-                    borderColor: "#EEC993",
-                    tension: 0.1
-                }, {
-                    label: "Area of cemetery (hectare)",
+                    label: "面積(公頃)",
                     data: [10132.85, 10046.11, 10462.90, 9595.46, 9658.29, 9681.52, 9591.15, 9528.83, 9635.33, 9547.70, 9621.71],
                     fill: false,
                     borderColor: "#C37E53",
                     tension: 0.1
-                }, {
-                    label: "Number of buried corpses",
-                    data: [24233, 23477, 20358, 23003, 20488, 19253, 16251, 15258, 13409, 12923, 11685],
-                    fill: false,
-                    borderColor: "#983108",
-                    tension: 0.1
-                }, {
-                    label: "Burial rate (%)",
+                }]
+            },
+            options: {}
+        };
+
+        let inView = false;
+        let inView2 = false;
+        $(function() {
+            $(window).scroll(function() {
+                let scrolled = $(window).scrollTop();
+                let winh = $(window).height();
+                let objpos = $("#lineChart1").offset().top;
+                if (objpos < scrolled + winh * 0.5 && !inView2) {
+                    new Chart(ctx2, chartdata);
+                    inView2 = true;
+                }
+            });
+        });
+
+        let ctx3 = document.getElementById("lineChart2").getContext("2d");
+        let chartdata2 = {
+            type: "line",
+            data: {
+                labels: [2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011],
+                datasets: [{
+                    label: "土葬率 (%)",
                     data: [18.95, 18.29, 14.66, 17.07, 14.66, 14.12, 11.58, 10.63, 9.34, 8.86, 7.63],
                     fill: false,
                     borderColor: "#231E18",
@@ -69,16 +81,16 @@
             options: {}
         };
 
-        let inView = false;
-        let inView2 = false;
-        $(".line-chart").ready(function() {
+        let inView3 = false;
+        let inView4 = false;
+        $(function() {
             $(window).scroll(function() {
                 let scrolled = $(window).scrollTop();
                 let winh = $(window).height();
-                let objpos = $("#lineChart").offset().top;
-                if (objpos < scrolled + winh * 0.5 && !inView2) {
-                    new Chart(ctx2, chartdata);
-                    inView2 = true;
+                let objpos = $("#lineChart2").offset().top;
+                if (objpos < scrolled + winh * 0.5 && !inView4) {
+                    new Chart(ctx3, chartdata2);
+                    inView4 = true;
                 }
             });
         });

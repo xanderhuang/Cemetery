@@ -2,9 +2,10 @@
 <html lang="en">
 
 <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" href="cemetery_excavator_google_earth_files/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 
     <meta charset="utf-8">
     <style>
@@ -19,83 +20,103 @@
             min-height: 100%;
             width: auto;
             height: auto;
-            z-index: -1;
+            z-index: 9999;
         }
     </style>
+    <script>
+        var flag = true;
+        var flag1 = false;
+    </script>
 </head>
 
 <body>
-    <div class="lead_in">
-        <div style="height:1000vh; background-color: #EEC695">
-            <img class="opa" src="https://i.imgur.com/dQSG9fY.jpg" style="position:fixed;opacity:1;width:100vw;z-index:4" data-pos="1" ;>
-            <img class="opa" src="https://i.imgur.com/7obvwwS.jpg" style="position:fixed;opacity:1;width:100vw;z-index:3" data-pos="2" ;>
-            <img src="https://i.imgur.com/Aw8DFVR.jpg" style="position:fixed;opacity:1;width:100vw;z-index:1">
-        </div>
-        <div style=" height:100vh; background-color: #EEC695"></div>
-    </div>
-
-    <div class="container-fluid">
+    <div class="video1" id='video1' style='display:none'>
         <div class="scroll_video_excavator" style="height: 300vh; padding: 0px;">
-            <video id="video_excavator" src="https://i.imgur.com/K9TNisB.mp4"></video>
+            <video id="video_excavator" src="cemetery_excavator_google_earth_files/K9TNisB.mp4" style="opacity: -1.98932;  "></video>
             <div style="width:100%; min-height:6000px"></div>
         </div>
     </div>
-
-    <div class="container-fluid">
+    <div class="video2" id='video2' style='display:none'>
         <div class="scroll_video_google_earth" style="height: 300vh; padding: 0px;">
-            <video id="video_google_earth" src="https://i.imgur.com/228fAzj.mp4"></video>
+            <video id="video_google_earth" src="cemetery_excavator_google_earth_files/228fAzj.mp4" style="opacity: -2.73977;"></video>
             <div style="width:100%; min-height:6000px"></div>
         </div>
     </div>
+    <div class="lead_in" id="lead_in">
+        <div style="height:1000vh; background-color: #EEC695">
+            <img class="opa" src="cemetery_excavator_google_earth_files/dQSG9fY.jpg" style="position: fixed; opacity: -3.69221; width: 100vw; z-index: 4;" data-pos="1">
+            <img class="opa" src="cemetery_excavator_google_earth_files/7obvwwS.jpg" style="position: fixed; opacity: -2.69221; width: 100vw; z-index: 3;" data-pos="2">
+            <img class="opa" id="last" src="cemetery_excavator_google_earth_files/Aw8DFVR.jpg" style="position:fixed;opacity:1;width:100vw;z-index:2;" data-pos="3">
+        </div>
+        <div style="height:1000vh; background-color: #EEC695"></div>
+    </div>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+    <script src="cemetery_excavator_google_earth_files/jquery-3.2.1.min.js"></script>
+    <script src="cemetery_excavator_google_earth_files/popper.min.js"></script>
+    <script src="cemetery_excavator_google_earth_files/bootstrap.min.js"></script>
     <script>
         // Lead-in
         $(function() {
-            let scrollable = $(".lead_in").height() - $(window).height();
+            let scrollable = $(".lead_in").height() + $(".scroll_video_excavator").height() +
+                $(".scroll_video_google_earth").height() - $(window).height();
             console.log(scrollable);
             $(window).scroll(function() {
                 let scrolled = $(document).scrollTop();
-                $(".opa").each(function(index) {
-                    $(this).css("opacity", $(this).data("pos") - (4 * scrolled) / scrollable);
-                    console.log(
-                        "[" + scrolled / scrollable + "]" + index + ": " + $(this).css("opacity")
-                    );
-                });
-            });
-        });
-
-        // Excavator scroll video
-        $(function() {
-            var cover_scroll_max = $(".scroll_video_excavator").height() - $(window).height();
-            $(window).scroll(function() {
-                var current_pos = $(document).scrollTop();
-                var video = $("#video_excavator").get(0);
-                var videolength = video.duration;
-                if (current_pos >= 0 && current_pos < $(".scroll_video_excavator").offset().top + $(".scroll_video_excavator").height()) {
-                    video.currentTime = current_pos / cover_scroll_max * videolength;
-                    $("#video_excavator").css("opacity", 1 - (current_pos / cover_scroll_max - 0.7));
+                if (document.getElementById("last").style.opacity < 0.1) {
+                    // last是最後一張圖片，如果最後一張跑完就要打開video1的顯示，并且隱藏圖片div
+                    if (!flag1) {
+                        ini("video1");
+                        scrollvideo($(".scroll_video_excavator"), $("#video_excavator"), document.getElementById("video1").style.opacity);
+                    } else {
+                        ini("video2");
+                        scrollvideo($(".scroll_video_google_earth"), $("#video_google_earth"), document.getElementById("video2").style.opacity);
+                    }
+                } else {
+                    $(".opa").each(function(index) {
+                        $(this).css("opacity", $(this).data("pos") - (4 * scrolled) / scrollable);
+                        console.log(
+                            "[" + scrolled / scrollable + "]" + index + ": " + $(this).css("opacity")
+                        );
+                    });
                 }
             });
         });
 
-        // Google Earth scroll video
-        $(function() {
-            var cover_scroll_max = $(".scroll_video_google_earth").height() - $(window).height();
-            $(window).scroll(function() {
-                var current_pos = $(document).scrollTop();
-                var video = $("#video_google_earth").get(0);
-                var videolength = video.duration;
-                if (current_pos >= 0 && current_pos < $(".scroll_video_google_earth").offset().top + $(".scroll_video_google_earth").height()) {
-                    video.currentTime = current_pos / cover_scroll_max * videolength;
-                    $("#video_google_earth").css("opacity", 1 - (current_pos / cover_scroll_max - 0.7));
-                }
-            });
-        });
+        function ini(frame) {
+            switch (frame) {
+                case "video1":
+                    document.getElementById("lead_in").style.display = "none"; //顯示
+                    document.getElementById("video2").style.display = "none"; //顯示
+                    document.getElementById("video1").style.display = ""; //顯示
+
+                    break;
+                case "video2":
+                    document.getElementById("lead_in").style.display = "none"; //顯示
+                    document.getElementById("video2").style.display = ""; //顯示
+                    document.getElementById("video1").style.display = "none"; //顯示    
+                    break;
+            }
+            if (flag) {
+                window.document.body.scrollTop = 0;
+                window.document.documentElement.scrollTop = 0;
+                flag = false;
+            }
+        }
+
+        function scrollvideo(_css, _video, op) {
+            var cover_scroll_max = _css.height() - $(window).height();
+            var current_pos = $(document).scrollTop();
+            var video = _video.get(0);
+            var videolength = video.duration;
+            if (current_pos >= 0 && current_pos < _css.offset().top + _css.height()) {
+                video.currentTime = current_pos / cover_scroll_max * videolength;
+                _video.css("opacity", 1 - (current_pos / cover_scroll_max - 0.7));
+            } else {
+                flag1 = true;
+                flag = true;
+            }
+        }
     </script>
-
 </body>
 
 </html>
