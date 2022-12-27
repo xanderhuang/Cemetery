@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto Serif TC">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto Sans TC">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fredericka the Great">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Passero+One">
+    <!-- Carousel & Blog -->
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/carousel/">
+    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Carousel -->
+    <link href="css/carousel.css" rel="stylesheet">
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/blog/">
+    <!-- Blog -->
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
+    <link href="css/blog.css" rel="stylesheet">
+    <!-- Line Chart-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
+    <!--Title-->
+    <title>獨留青塚向黃昏</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark text-center">
+            <div class="container text-center">
+                <a class="navbar-brand" href="#">獨留青塚向黃昏：臺南南山公墓遷葬議題</a>
+            </div>
+        </nav>
+    </header>
+    <main role="main">
+        <!-- Blog -->
+        <div class="album py-5 bg-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 blog-main">
+                        <div class="blog-post">
+                            <p>從臺南火車站前站的公車亭搭上公車，約莫半小時的車程，尚未真正遠離城市的中心地帶，就可以碰見這一大片的墓地。南山公墓，就位在府城南區，在府城發展成為臺灣政治與文化重鎮前期的清領時期，這裡就已經是大南門外的一片規模頗鉅的墳地。經過百年的演變，日治時期政府頒布的《臺南市街市區計畫》，將自由發展的墳地轉變為由政府管理的公墓，也清除了一部分的墓塚。不過，目前南山公墓的佔地仍有94.7公頃，與南側僅隔一條路的臺南機場遙相望，面積之大也一點不遜色。</p>
+                            <p>隨著都市計畫的施行，城市中的建設持續增加，用地的需求也不斷上升。南山公墓這一片人煙罕至的城郊土地，因為城市的擴張，原本位在城市外圍郊區的南山公墓，成為了「核心中的邊陲」。日治時期引進的火葬新制、早在80年代就公告的都市計畫開發方案、1990年開始的公墓禁葬措施⋯⋯都讓傳統墓葬形式與文化式微，而南山公墓這一片鄰近城市核心的土地，自然被視作整頓、更新的目標。既已被視作整頓與更新的目標，南山公墓環境的維護便不再受市府重視。於是，遷葬後的空墓冢、無主或無人祭祀的孤墳孤單地被塵土覆蓋，無人看顧；寂靜的公墓深處淪為非法傾倒廢棄物的掩埋場；收藏府城常民歷史的墓冢一度在妥當的文資查估前就面臨拆除命運。
+                                臺南市府表示，南山公墓分區將安排作為有火化場、殯儀館、納骨塔、環保自然葬區、環保庫錢爐的殯葬專區、停車場、生命博物館、緩衝綠帶、公園等。部分墓區已完成遷葬、改建為兒童公園；而絕大多數的區域，因文史團體的呼籲，仍在進行文資查估。位於都市核心邊陲的寂靜墓地，正迎接時代的巨變。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+</body>
+<script>
+    // line chart
+    let ctx2 = document.getElementById("lineChart1").getContext("2d");
+    let chartdata = {
+        type: "line",
+        data: {
+            labels: [2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011],
+            datasets: [{
+                label: "面積（公頃）",
+                data: [10132.85, 10046.11, 10462.90, 9595.46, 9658.29, 9681.52, 9591.15, 9528.83, 9635.33, 9547.70, 9621.71],
+                fill: false,
+                borderColor: "#C37E53",
+                tension: 0.1
+            }]
+        },
+        options: {}
+    };
+
+    let inView = false;
+    let inView2 = false;
+    $(function() {
+        $(window).scroll(function() {
+            let scrolled = $(window).scrollTop();
+            let winh = $(window).height();
+            let objpos = $("#lineChart1").offset().top;
+            if (objpos < scrolled + winh * 0.5 && !inView2) {
+                new Chart(ctx2, chartdata);
+                inView2 = true;
+            }
+        });
+    });
+
+    let ctx3 = document.getElementById("lineChart2").getContext("2d");
+    let chartdata2 = {
+        type: "line",
+        data: {
+            labels: [2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011],
+            datasets: [{
+                label: "土葬率（％）",
+                data: [18.95, 18.29, 14.66, 17.07, 14.66, 14.12, 11.58, 10.63, 9.34, 8.86, 7.63],
+                fill: false,
+                borderColor: "#231E18",
+                tension: 0.1
+            }]
+        },
+        options: {}
+    };
+
+    let inView3 = false;
+    let inView4 = false;
+    $(function() {
+        $(window).scroll(function() {
+            let scrolled = $(window).scrollTop();
+            let winh = $(window).height();
+            let objpos = $("#lineChart2").offset().top;
+            if (objpos < scrolled + winh * 0.5 && !inView4) {
+                new Chart(ctx3, chartdata2);
+                inView4 = true;
+            }
+        });
+    });
+</script>
+
+</html>
+
+</html>
